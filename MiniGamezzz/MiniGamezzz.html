@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+
+<html id= "body">
+
+<head>
+
+	<title> MiniGamezzz </title>
+
+	<style>
+		
+		#hub {
+			font-family: comic sans ms;
+			text-align: center;
+			color: #6B541F;
+		}
+
+		#body {
+			background-color: black;
+		}
+
+		#photo1 {
+			padding-left: 50px;
+			padding-top: 150px;
+			width: 750px;
+			position: absolute;
+			z-index: 1;
+		}
+
+		#photo2 {
+			padding-left: 1000px;
+			width: 840px;
+			position: absolute;
+			padding-top: 150px;
+		}
+
+		.scale1 {
+    		transition: 0.8s;
+    		position: absolute;
+		  	top: 0;
+		  	left: 0;
+		  	padding-bottom: 120px;
+   		}
+
+		.scale2 {
+    		transition: 0.75s;
+    		position: relative;
+    	    z-index: 0;
+   		}
+
+    	#table1 {
+    		position: fixed;
+    		width: 100%;
+    		z-index: 100;
+    		background-color: #FF0000;
+
+    	}
+
+    	#table2 {
+    		padding-top: 7.15%;
+    		z-index: 0;
+    	}
+
+    	#div1 {
+    		background-color: #54FFA4;
+    		color: rgba(0,0,0,0);
+    		padding-top: 4.15%;
+    		position: fixed;
+    		z-index: 99;
+
+    	}
+
+    	#bigtable {
+    		padding-bottom: 70px;
+    	}
+
+
+
+
+	</style>
+
+</head>
+
+<body>
+	<table id="bigtable">
+		<thead>
+			<tr>
+				<th colspan="2" id="table1"><h1 id="hub"> GamezzzHub </h1></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<th colspan="2"> <div id="div1" style="width:0%"> . </div> </th>
+			</tr>
+			<tr>
+				<table>
+					<tr>
+						<td> <a href="LB BreakOut 2.2 Classic.html"> <img id="photo3_1" class='scale2' src="Game1.png" width="300" style="z-index: -1; position: relative; padding-left: 75px; padding-top: 100px;"> </a> </td>
+						<td> <a href="LB BreakOut 2.2 Rainbow Edition.html"> <img id="photo3_2" class='scale2'src="Game2.png" width="300" style="z-index: -1; position: relative; padding-left: 75px; padding-top: 100px;"></td>
+					</tr>
+					<tr>
+						<td> <a href="LB BreakOut 2.2 Mobile.html"> <img id="photo3_3" class='scale2' src="Game3.png" width="300" style="z-index: -1; position: relative; padding-left: 75px; padding-top: 20px; padding-bottom: 10px;"> </a> </td>
+						<td> <a href="LB BreakOut 2.2 Rainbow Edition.html"> <img id="photo3_4" class='scale2' src="Game4.png" width="300" style="z-index: -1; position: relative; padding-left: 75px; padding-top: 20px; padding-bottom: 10px;"> </a> </td>
+					</tr>
+				</table>
+				<td id="table2"> <a> <img src="Breakout Screenshot.png" id="photo1" class='scale1'> </a> </td>
+				<td id="table2"> <a href="LB Snake.html"> <img src="Snake Screenshot.png" id="photo2" class='scale1'> </a></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+			</tr>
+		</tbody>
+	</table>
+
+	<script>
+
+		var photo1 = document.getElementById('photo1');
+		
+		var photo3_1 = document.getElementById('photo3_1');
+		var photo3_2 = document.getElementById('photo3_2');
+		var photo3_3 = document.getElementById('photo3_3');
+		var photo3_4 = document.getElementById('photo3_4');
+
+		var bigtable = document.getElementById('bigtable');
+
+		var body = document.getElementById("body");
+
+		var div = document.getElementById("div1");
+
+		var Red = 255;
+		var Green = 0;
+		var Blue = 0;
+
+		var HRed = 0;
+		var HGreen = 0;
+		var HBlue = 0;
+
+		var Color = "";
+
+		var colourchange = setInterval(ChangeColor, 0.25);
+
+		var nav = document.getElementById("table1");
+
+		photo1.onmouseover = function () {
+			photo1.style = "transform: scale(0.9); opacity: 0.5; z-index: -1;";
+			photo3_1.style = "transform: scale(1.2); z-index: 5; padding-left: 75px; padding-top: 50px;";
+			photo3_2.style = "transform: scale(1.2); z-index: 5; padding-left: 75px; padding-top: 50px;";
+			photo3_3.style = "transform: scale(1.3); z-index: 5; padding-left: 75px; padding-top: 80px;";
+			photo3_4.style = "transform: scale(1.3); z-index: 5; padding-left: 75px; padding-top: 80px;";
+		}
+
+		photo3_1.onmouseout = function () {
+			photo1.style = "transform: scale(1); opacity: 1; z-index: 5;";
+			photo3_1.style = "transform: scale(0.8); z-index: -1; padding-left: 75px; padding-top: 50px;";
+			photo3_2.style = "transform: scale(0.8); z-index: -1; padding-left: 75px; padding-top: 50px;";
+			photo3_3.style = "transform: scale(0.7); z-index: -1; padding-left: 75px; padding-top: 50px; padding-bottom: 30px;";
+			photo3_4.style = "transform: scale(0.7); z-index: -1; padding-left: 75px; padding-top: 50px; padding-bottom: 30px;";
+		}
+
+		photo3_2.onmouseout = function () {
+			photo1.style = "transform: scale(1); opacity: 1; z-index: 5;";
+			photo3_1.style = "transform: scale(0.8); z-index: -1; padding-left: 75px; padding-top: 50px;";
+			photo3_2.style = "transform: scale(0.8); z-index: -1; padding-left: 75px; padding-top: 50px;";
+			photo3_3.style = "transform: scale(0.7); z-index: -1; padding-left: 75px; padding-top: 50px; padding-bottom: 30px;";
+			photo3_4.style = "transform: scale(0.7); z-index: -1; padding-left: 75px; padding-top: 50px; padding-bottom: 30px;";
+		}
+
+		photo3_3.onmouseout = function () {
+			photo1.style = "transform: scale(1); opacity: 1; z-index: 5;";
+			photo3_1.style = "transform: scale(0.8); z-index: -1; padding-left: 75px; padding-top: 50px;";
+			photo3_2.style = "transform: scale(0.8); z-index: -1; padding-left: 75px; padding-top: 50px;";
+			photo3_3.style = "transform: scale(0.7); z-index: -1; padding-left: 75px; padding-top: 50px; padding-bottom: 30px;";
+			photo3_4.style = "transform: scale(0.7); z-index: -1; padding-left: 75px; padding-top: 50px; padding-bottom: 30px;";
+		}
+
+		photo3_4.onmouseout = function () {
+			photo1.style = "transform: scale(1); opacity: 1; z-index: 5;";
+			photo3_1.style = "transform: scale(0.8); z-index: -1; padding-left: 75px; padding-top: 50px;";
+			photo3_2.style = "transform: scale(0.8); z-index: -1; padding-left: 75px; padding-top: 50px;";
+			photo3_3.style = "transform: scale(0.7); z-index: -1; padding-left: 75px; padding-top: 50px; padding-bottom: 30px;";
+			photo3_4.style = "transform: scale(0.7); z-index: -1; padding-left: 75px; padding-top: 50px; padding-bottom: 30px;";
+		}
+
+		window.addEventListener("scroll", function(event) { 
+  
+            var scroll_y = this.scrollY; 
+            div.style = "width:" + body.scrollTop/(body.scrollHeight-body.clientHeight)*100 + "%;";
+        });
+
+		function ChangeColor() {
+
+				if (Red == 255 && Blue == 0) {
+					Green ++;
+				}
+				if (Green == 255 && Blue == 0) {
+					Red -= 1;
+				}
+				if (Red == 0 && Green == 255) {
+					Blue ++;
+				}
+				if (Red == 0 && Blue == 255) {
+					Green -= 1;
+				}
+				if (Blue == 255 && Green == 0) {
+					Red ++;
+				}
+				if (Red == 255 && Green == 0) {
+					Blue -= 1;
+				}
+				HRed = Red.toString(16);
+				HGreen = Green.toString(16);
+				HBlue = Blue.toString(16);
+				if (HRed.length < 2) {
+					HRed = "0" + HRed;
+				}
+				if (HGreen.length < 2) {
+					HGreen = "0" + HGreen;
+				}
+				if (HBlue.length < 2) {
+					HBlue = "0" + HBlue;
+				}		
+				Color = "#" + HRed + HGreen + HBlue;
+				nav.style = "background-color: " + Color + ";";
+		}
+
+	</script>
+
+</body>
+
+</html>

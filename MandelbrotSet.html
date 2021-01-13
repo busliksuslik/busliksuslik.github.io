@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+
+		<title> Mandelbrot Set </title>
+
+		<style>
+
+			* {
+				margin: 0;
+				padding: 0;
+			}
+
+			body {
+				background: black;
+				display: flex;
+				text-align: center;
+			}
+
+			#canvas {
+				border: groove;
+				border-width: 2px;
+				border-color: white;
+				margin: auto;
+				margin-top: 100px;
+			}
+
+			h1 {
+				font-family: arial;
+				font-size: 20px;
+				color: white;
+				text-align: center;
+			}
+
+		</style>
+
+	</head>
+
+	<body>
+
+		<canvas id="canvas" width="900" height="600"> </canvas>
+
+		<script>
+
+			const canvas = document.getElementById("canvas");
+			const ctx = canvas.getContext("2d");
+
+			var width = ctx.canvas.width ;
+			var height = ctx.canvas.height ;
+
+			var x = -2;
+			var y = -1;
+
+			var x_step = 1 / width*3;
+			var y_step = 1 / height*2;
+
+			var iterations = 2000;
+
+			class Complex {
+				constructor(a,b) {
+				this.real = a;
+				this.img = b;
+			}
+			sum(num1,num2) {
+				return new Complex(num1.real+num2.real, num1.img+num2.img);
+			}
+			absSquare() {
+				var a = Math.pow(this.real, 2) + Math.pow(this.img, 2);
+				return a;
+			}
+			toStr(){
+				alert(this.real+" "+this.img);
+			}
+			square() {
+				var newreal = (Math.pow(this.real,2)-Math.pow(this.img,2));
+				var newimg = this.real * this.img * 2;
+				return new Complex(newreal,newimg);
+			}
+			}
+
+			function draw_point(a, b, color) {
+				ctx.fillStyle = color;
+				ctx.fillRect(a, b, 1, 1);
+			}
+
+			function absolute_x(a) {
+				a = a + 2;
+				a = a * (width / 3);
+				a = Math.trunc(a);
+				return a;
+			}
+
+			function absolute_y(a) {
+				a = -a;
+				a++;
+				a = a * (height / 2);
+				a = Math.trunc(a);
+				return a;
+			}
+			function relative_x(a){
+				a = x + a*x_step;
+				return a;
+
+			}
+			function relative_y(a){
+				a = y + a*y_step;
+				return a;
+
+			}
+			function getPicture(){
+				var localx = x;
+				var localy = y;
+				for (var i = 0; i < width; i++) {
+					for (var j = 0; j < height; j++) {
+						var loc  = isInSet(new Complex(localx,localy))
+						if (loc == 0) {
+						draw_point(i,j, "#000000");
+						} else if (loc > 0){
+							draw_point(i,j, changeColor(loc));
+						}
+					localy += y_step;
+					}
+				localx += x_step;
+				localy = y;
+				}
+
+			}
+			getPicture();
+
+			function mousepos(event){
+				var rect = canvas.getBoundingClientRect();
+			    x = relative_x(event.clientX - rect.left - 15);
+			    y = relative_y(event.clientY - rect.top - 15);
+			    x_step = x_step/10;
+			    y_step = y_step/10;
+			    ctx.fillStyle= "#000000";
+			    ctx.clearRect(0,0,width,height);
+			    getPicture();
+			}
+			function getMousePos(canvas, evt) {
+		        var rect = canvas.getBoundingClientRect();
+		        return {
+		          x: evt.clientX - rect.left,
+		          y: evt.clientY - rect.top
+		        };
+		      }
+
+			document.addEventListener('mousedown', mousepos);
+			/*for (var i = 0; i < width; i++) {
+			for (var j = 0; j < height; j++) {
+			draw_point(absolute_x(x),absolute_y(y));
+			y += y_step;
+			}
+			y = -1;
+			x += x_step;
+			}*/
+
+
+			/*if (isInSet(new Complex(0,0))) {
+			alert("beepboop");
+			}*/
+
+			function isInSet(a) {
+			var cons = new Complex(0,0);
+			for (var i = 0; i < iterations; i++) {
+				cons = cons.sum(a, cons.square());
+				if (cons.absSquare() > 4) {
+					return i;
+				}
+			}
+				return 0;
+			}
+			
+			function changeColor(a){
+				var Red = 255;
+				var Green = 0;
+				var Blue = 0;
+				for (var i = 0 ; i < a ; i++){
+					if (Red == 255 && Blue == 0) {
+								Green ++;
+							}
+							if (Green == 255 && Blue == 0) {
+								Red -= 1;
+							}
+							if (Red == 0 && Green == 255) {
+								Blue ++;
+							}
+							if (Red == 0 && Blue == 255) {
+								Green -= 1;
+							}
+							if (Blue == 255 && Green == 0) {
+								Red ++;
+							}
+							if (Red == 255 && Green == 0) {
+								Blue -= 1;
+							}
+							HRed = Red.toString(16);
+							HGreen = Green.toString(16);
+							HBlue = Blue.toString(16);
+							if (HRed.length < 2) {
+								HRed = "0" + HRed;
+							}
+							if (HGreen.length < 2) {
+								HGreen = "0" + HGreen;
+							}
+							if (HBlue.length < 2) {
+								HBlue = "0" + HBlue;
+					}
+				}
+				var color = "#" + HRed + HGreen + HBlue;
+				return color
+			}
+
+
+
+		</script>
+
+	</body>
+
+</html>
