@@ -2,39 +2,118 @@
 <html>
 <head>
 	<title>Main page</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="./styles/index.css">
 </head>
 <body>
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="#">Моё портфолио</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
 
-  <div class="collapse navbar-collapse" id="navbarColor02">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="https://github.com/busliksuslik">Ссылка на гитхаб</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="htmlProjects.html">HTML</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="htmlcssProjects.html">HTML/CSS</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="canvasProjects.html">canvas</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="figmaProjects.html">figma</a>
-      </li>
-    </ul>
+  <div class="navbar" id = "navbar">
+      <a href="https://github.com/busliksuslik">Ссылка на гитхаб</a>
+      <a href="htmlProjects.html">HTML</a>
+      <a href="htmlcssProjects.html">HTML/CSS</a>
+      <a class="nav-link" href="canvasProjects.html">canvas</a>
+      <a class="nav-link" href="figmaProjects.html">figma</a>
+    </div>
+
+  <div class="hello_wrapper">
+    <div class="content"><br>
+      <h1>Добро пожаловать</h1>
+      <h2>Я разработчик ПО</h2>
+    </div>
+    <div class = "background">
+      <canvas onmousemove="draw(event)" width="800" height="800" id="fireworks"></canvas>
+    </div>
   </div>
-</nav>
-	<h1>Добро пожаловать</h1>
-	<h2>Я разработчик ПО</h2>
+
+	
+  
+  <br>
+  <br>
+  <br>
+  <br>
+  <br><br><br><br><br><br><br><br><br><br><br>
+  <br><br><br><br><br><br><br><br><br><br><br>
+  <br><br><br><br><br><br><br><br><br><br><br>
+  <br><br><br><br><br><br><br><br><br><br><br>
+  <br><br><br><br><br><br><br><br><br><br><br>
+  <br><br><br><br><br><br><br><br><br><br><br>
+  <script type="text/javascript">
+    var prevScrollpos = window.pageYOffset;
+    window.onscroll = function() {
+    var currentScrollPos = window.pageYOffset;
+      if (currentScrollPos > 190) {
+        document.getElementById("navbar").style.background = "#000";
+      } else {
+        document.getElementById("navbar").style.background = "";
+      }
+      prevScrollpos = currentScrollPos;
+    }
+
+  </script>
+    <script type="text/javascript">
+
+    class Point{
+      constructor(x,y){
+        this.x = x;
+        this.y = y;
+        var angle = Math.random()*2*Math.PI
+        this.dx = Math.cos(angle)*2;
+        this.dy = Math.sin(angle)*2;
+        this.color = colors[Math.floor(Math.random()*6)]
+      }
+      move(){
+        this.x += this.dx;
+        this.y += this.dy;
+      }
+      draw(){
+        ctx.fillStyle = this.color;
+          ctx.fillRect (this.x, this.y, 1, 1);
+      }
+    }
+    var colors = 
+      ["#CE2029",
+      "#FFFCAF",
+      "#FFE17C",
+      "#FF66B",
+      "#903843"]
+        
+    var canvas = document.getElementById("fireworks");
+    var ctx = canvas.getContext("2d");
+    canvas.width = window.screen.width;
+    canvas.height = window.screen.height*(4/7);
+    var width = canvas.width;
+    var height = canvas.height;
+    var points = [];
+    ctx.fillStyle = "#000000";
+    ctx.fillRect(0, 0, width, height);
+
+    function  getMousePos(canvas, evt) {
+      var rect = canvas.getBoundingClientRect(), // abs. size of element
+          scaleX = canvas.width / rect.width,    // relationship bitmap vs. element for X
+          scaleY = canvas.height / rect.height;  // relationship bitmap vs. element for Y
+      return {
+        x: (evt.clientX - rect.left) * scaleX,   // scale mouse coordinates after they have
+        y: (evt.clientY - rect.top) * scaleY     // been adjusted to be relative to element
+      }
+    }
+    function draw(evt) {
+        var pos = getMousePos(canvas, evt);
+        for (var i = 0; i < 5; i++){
+          points.push(new Point(pos.x,pos.y));
+        }
+        
+    }
+    function frame(){
+      ctx.fillStyle = "#000000";
+      ctx.fillRect(0, 0, width, height);
+      for (var i = 0; i < points.length; i++){
+        points[i].draw();
+        points[i].move();
+      }
+      points = points.filter(point => point.x < width && point.y < height)
+      requestAnimationFrame(frame)
+    }
+    requestAnimationFrame(frame)
+
+  </script>
 </body>
 </html>
